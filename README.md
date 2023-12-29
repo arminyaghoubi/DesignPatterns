@@ -18,6 +18,11 @@ This repository showcases a range of design patterns applied within a C# applica
 - **Description:** The Command pattern encapsulates a request as an object, thereby enabling parameterizing clients with queues, requests, and operations. It allows decoupling sender and receiver, supporting operations like undo/redo, logging, queuing, etc.
 - **Use Cases:** Ideal for implementing operations as objects, supporting operations history, queuing, and undo/redo functionalities.
 
+### Iterator
+
+- **Description:** The Iterator pattern provides a way to access elements of a collection sequentially without exposing its underlying representation. It encapsulates the navigation of a collection and decouples the traversal logic from the actual collection, allowing iteration over different collection types.
+- **Use Cases:** Useful when you want to provide a consistent way to traverse different collections without exposing their structure, allowing for iteration over complex data structures.
+
 ### Upcoming Patterns
 
 🚀 **Stay tuned for updates!** Our roadmap includes various design patterns like Singleton, Factory Method, Observer, and more. Each pattern will be accompanied by a concise description and its specific applications within the project.
