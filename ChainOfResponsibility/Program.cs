@@ -1,35 +1,26 @@
-﻿using ChainOfResponsibility.Handlers.Orders;
-using ChainOfResponsibility.Interfaces;
+﻿using ChainOfResponsibility.Handlers;
 using ChainOfResponsibility.Models;
 
-Console.ForegroundColor = ConsoleColor.DarkGreen;
-Console.WriteLine("Chain of Responsibility");
+AmountHandler amountHandler = new();
+DailyTransactionHandler dailyTransactionHandler = new();
+BalanceHandler balanceHandler = new();
 
-Order order = new()
+amountHandler.SetNextHandler(dailyTransactionHandler);
+dailyTransactionHandler.SetNextHandler(balanceHandler);
+
+SaleTransactionRequest request = new SaleTransactionRequest
 {
-    Amount = 10,
-    CustomerName = "Armin Yaghoubi",
-    CustomerPhone = "09912509526",
-    Address = "Iran, Tehran"
+    PrimaryAccountNumber = "6221061012345678",
+    Password = "0000",
+    Amount = 50_000_000
 };
-
-IOrderHandler addressHandler = new AddressHandler();
-IOrderHandler customerPhoneHandler = new CustomerPhoneHandler(addressHandler);
-IOrderHandler customerNameHandler = new CustomerNameHandler(customerPhoneHandler);
-IOrderHandler amountHandler = new AmountHandler(customerNameHandler);
 
 try
 {
-    amountHandler.Handle(order);
-
-    Console.ForegroundColor= ConsoleColor.White;
-    Console.WriteLine("The order is ok!");
+    amountHandler.Handle(request);
 }
 catch (Exception ex)
 {
-    Console.ForegroundColor = ConsoleColor.DarkRed;
+    Console.ForegroundColor = ConsoleColor.Red;
     Console.WriteLine(ex.Message);
 }
-
-
-Console.ReadKey();
